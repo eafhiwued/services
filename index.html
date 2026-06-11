@@ -397,5 +397,64 @@ to me
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="main.js"></script>
+<script>
+// 1. Unlocks the loading screen smoothly
+window.addEventListener('DOMContentLoaded', () => {
+const loader = document.getElementById('loader');
+if (loader) {
+setTimeout(() => {
+loader.style.opacity = '0';
+loader.style.visibility = 'hidden';
+document.body.classList.add('hero-animate-in');
+
+// Spins the visual dashboard gauge needle to life
+const needle = document.getElementById('gaugeNeedle');
+if (needle) needle.style.transform = 'rotate(135deg)';
+}, 1000);
+}
+});
+
+// 2. Toggles header styling background on scroll
+const header = document.getElementById('header');
+if (header) {
+window.addEventListener('scroll', () => {
+if (window.scrollY > 20) {
+header.classList.add('is-scrolled');
+} else {
+header.classList.remove('is-scrolled');
+}
+});
+}
+
+// 3. Handles mobile overlay menu opening/closing
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+
+if (menuToggle && mobileMenu) {
+function toggleMenu(forceState) {
+const isOpen = forceState !== undefined ? forceState : menuToggle.getAttribute('aria-expanded') === 'false';
+menuToggle.setAttribute('aria-expanded', isOpen);
+mobileMenu.classList.toggle('is-open', isOpen);
+document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+menuToggle.addEventListener('click', () => toggleMenu());
+}
+
+// 4. Triggers smooth scroll fade-ins as you scroll down
+const revealElements = document.querySelectorAll('[data-reveal]');
+if (revealElements.length > 0) {
+const revealObserver = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('reveal-in');
+revealObserver.unobserve(entry.target);
+}
+});
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+revealElements.forEach(el => revealObserver.observe(el));
+}
+</script>
+
 </body>
 </html>
