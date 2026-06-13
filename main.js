@@ -112,7 +112,7 @@
   function finishGauge() {
     if (arc) arc.style.strokeDashoffset = 0;
     if (needleGroup) needleGroup.style.transform = "rotate(" + GAUGE.endDeg + "deg)";
-    if (gaugeValue) gaugeValue.textContent = "30";
+    if (gaugeValue) gaugeValue.textContent = "11";
     document.querySelectorAll("[data-counter]").forEach(function (el) {
       el.textContent = el.getAttribute("data-counter") + el.getAttribute("data-suffix");
     });
@@ -171,7 +171,7 @@
     var gaugeState = { deg: GAUGE.startDeg, val: 0 };
     intro.to(gaugeState, {
       deg: GAUGE.endDeg,
-      val: 30,
+      val: 11,
       duration: 1.6,
       ease: "power2.inOut",
       onUpdate: function () {
