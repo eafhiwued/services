@@ -1,7 +1,5 @@
 /* ============================================================
    Grand Ozaukee Automotive — GSAP experience layer
-   Degrades gracefully: if GSAP fails to load or the user
-   prefers reduced motion, content renders fully visible.
    ============================================================ */
 
 (function () {
@@ -11,11 +9,11 @@
   var hasGSAP = typeof window.gsap !== "undefined";
   var animate = hasGSAP && !prefersReduced;
 
-  /* ---------- Always-on basics (no GSAP required) ---------- */
+  /* ---------- Always-on basics ---------- */
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Header background on scroll
+  // Header scroll style
   var header = document.getElementById("header");
   function onScroll() {
     header.classList.toggle("is-scrolled", window.scrollY > 12);
@@ -43,7 +41,7 @@
     if (e.key === "Escape") setMenu(false);
   });
 
-  // Contact form — validate only; let FormSubmit handle the actual submission
+  // Contact form — validate only; FormSubmit handles submission
   var form = document.getElementById("contactForm");
   var note = document.getElementById("formNote");
   form.addEventListener("submit", function (e) {
@@ -51,15 +49,32 @@
       e.preventDefault();
       note.textContent = "Please fill in your name, phone, and what your vehicle needs.";
     }
-    // If valid, do nothing — the form submits naturally to FormSubmit
   });
 
-  /* ---------- Build the gauge geometry (SVG) ---------- */
+  // Service card price reveal — anti-twitch: wait for collapse before expanding
+  window.toggleCard = function (card) {
+    var wasOpen = card.classList.contains("is-open");
+    var openCard = document.querySelector(".card.is-open");
+    if (openCard && openCard !== card) {
+      openCard.classList.remove("is-open");
+      if (!wasOpen) {
+        setTimeout(function () { card.classList.add("is-open"); }, 420);
+      }
+    } else {
+      if (wasOpen) {
+        card.classList.remove("is-open");
+      } else {
+        card.classList.add("is-open");
+      }
+    }
+  };
+
+  /* ---------- Gauge geometry ---------- */
 
   var GAUGE = { cx: 180, cy: 180, r: 140, startDeg: -130, endDeg: 130 };
 
   function polar(deg, radius) {
-    var rad = ((deg - 90) * Math.PI) / 180; // 0deg = straight up
+    var rad = ((deg - 90) * Math.PI) / 180;
     return {
       x: GAUGE.cx + radius * Math.cos(rad),
       y: GAUGE.cy + radius * Math.sin(rad)
@@ -105,7 +120,7 @@
     needleGroup.style.transform = "rotate(" + GAUGE.startDeg + "deg)";
   }
 
-  /* ---------- No animation? Snap everything to final state ---------- */
+  /* ---------- No animation fallback ---------- */
 
   var loader = document.getElementById("loader");
 
@@ -121,7 +136,7 @@
   if (!animate) {
     loader.style.display = "none";
     finishGauge();
-    return; // CSS keeps all content visible without the .js class
+    return;
   }
 
   /* ---------- GSAP experience ---------- */
@@ -129,7 +144,6 @@
   document.documentElement.classList.add("js");
   gsap.registerPlugin(ScrollTrigger);
 
-  // Loader → hero intro
   var intro = gsap.timeline({ defaults: { ease: "power3.out" } });
 
   intro
@@ -153,8 +167,7 @@
       stagger: 0.1
     }, "-=0.5");
 
-  // Failsafe: if rAF is throttled (hidden tab, low-power mode) the
-  // intro can stall with the loader covering the page. Force-finish it.
+  // Failsafe for throttled tabs
   setTimeout(function () {
     if (loader.style.display !== "none") {
       intro.progress(1);
@@ -165,7 +178,7 @@
     }
   }, 4000);
 
-  // Gauge: needle sweep + arc draw + value count
+  // Gauge sweep to 11
   if (arc) {
     var arcLength = arc.getTotalLength();
     var gaugeState = { deg: GAUGE.startDeg, val: 0 };
@@ -199,7 +212,7 @@
     });
   });
 
-  // Marquee: seamless infinite loop
+  // Marquee
   gsap.to("#marqueeTrack", {
     xPercent: -50,
     duration: 22,
@@ -223,13 +236,11 @@
     }
   });
 
-  // Safety net: anything still hidden when it should be visible
-  // (e.g. above the fold after resize) gets revealed.
   ScrollTrigger.addEventListener("refreshInit", function () {
     gsap.set("[data-reveal]", { clearProps: "transform" });
   });
 
-  // Subtle parallax on the hero glow (desktop pointer only)
+  // Parallax glow
   if (window.matchMedia("(pointer: fine)").matches) {
     var glow = document.querySelector(".hero__glow");
     window.addEventListener("mousemove", function (e) {
