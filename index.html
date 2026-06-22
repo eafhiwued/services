@@ -4,12 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Grand Ozaukee Automotive — Trusted Auto Repair for 11 Years</title>
-  <meta name="description" content="Grand Ozaukee Automotive is a locally owned auto repair shop with 11 years of experience. Oil changes, brakes, engines, transmissions, tires & more.">
+  <meta name="description" content="Grand Ozaukee Automotive is a locally owned auto repair shop with 11 years of experience. Oil changes, brakes, transmissions, tires & more.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,800;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🔧</text></svg>">
+  <style>
+    /* ── Price reveal cards ── */
+    .card { cursor: pointer; }
+    .card__reveal {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.42s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+    }
+    .card.is-open .card__reveal { max-height: 220px; opacity: 1; }
+    .card__divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 1rem 0 0.9rem; }
+    .card__price-label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent-2); margin-bottom: 0.3rem;
+    }
+    .card__price {
+      font: 400 1.9rem/1 var(--font-display);
+      letter-spacing: 0.04em; color: var(--text);
+    }
+    .card__price sub { font-size: 0.9rem; color: var(--muted); font-family: var(--font-body); vertical-align: baseline; }
+    .card__price-note { font-size: 0.78rem; color: var(--muted); margin-top: 0.35rem; line-height: 1.5; }
+    .card__price-row { display: flex; flex-direction: column; gap: 0.65rem; }
+    .card__chevron {
+      display: inline-block; margin-left: 5px;
+      font-size: 0.65rem; color: var(--muted);
+      transition: transform 0.3s ease; vertical-align: middle;
+    }
+    .card.is-open .card__chevron { transform: rotate(180deg); }
+    .card.is-open { border-color: rgba(255,90,31,0.55); background: var(--bg-3); }
+  </style>
 </head>
 <body>
 
@@ -25,7 +56,7 @@
   <header class="header" id="header">
     <div class="header__inner">
       <a href="#top" class="brand" aria-label="Grand Ozaukee Automotive — home">
-       <img src="logo.png" alt="Grand Ozaukee Automotive" class="brand__badge" style="width:44px;height:44px;object-fit:contain;border-radius:6px;background:none;">
+        <span class="brand__badge" aria-hidden="true">GO</span>
         <span class="brand__text">
           <span class="brand__name">Grand Ozaukee</span>
           <span class="brand__sub">Automotive</span>
@@ -96,13 +127,13 @@
           </div>
           <ul class="hero__proof" data-hero-fade>
             <li><strong data-counter="11" data-suffix="+">0</strong><span>Years in business</span></li>
-            <li><strong data-counter="11" data-suffix="">0</strong><span>Core services</span></li>
+            <li><strong data-counter="7" data-suffix="">0</strong><span>Core services</span></li>
             <li><strong data-counter="100" data-suffix="%">0</strong><span>Local &amp; independent</span></li>
           </ul>
         </div>
 
         <div class="hero__visual" aria-hidden="true">
-          <svg class="gauge" viewBox="0 0 360 360" role="img" aria-label="Speedometer gauge showing 30 years of experience">
+          <svg class="gauge" viewBox="0 0 360 360" role="img" aria-label="Speedometer gauge showing 11 years of experience">
             <defs>
               <linearGradient id="arcGrad" x1="0%" y1="100%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#ff5a1f"/>
@@ -113,15 +144,10 @@
                 <stop offset="100%" stop-color="#15171b"/>
               </radialGradient>
             </defs>
-            <!-- outer ring -->
             <circle cx="180" cy="180" r="172" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
-            <!-- tick marks -->
             <g id="gaugeTicks" stroke="rgba(255,255,255,.25)" stroke-width="3" stroke-linecap="round"></g>
-            <!-- track arc -->
             <path class="gauge__track" d="" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="14" stroke-linecap="round"/>
-            <!-- progress arc -->
             <path class="gauge__arc" d="" fill="none" stroke="url(#arcGrad)" stroke-width="14" stroke-linecap="round"/>
-            <!-- needle -->
             <g class="gauge__needle-group">
               <polygon class="gauge__needle" points="180,70 174,186 186,186" fill="#ff5a1f"/>
             </g>
@@ -141,10 +167,10 @@
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track" id="marqueeTrack">
         <div class="marquee__group">
-          <span>Oil Changes</span><i>•</i><span>Brake Repair</span><i>•</i><span>Engine Repair</span><i>•</i><span>Transmission</span><i>•</i><span>HVAC</span><i>•</i><span>Steering &amp; Suspension</span><i>•</i><span>Tires</span><i>•</i><span>Fluids &amp; Filters</span><i>•</i>
+          <span>Oil Changes</span><i>•</i><span>Brake Service</span><i>•</i><span>Tire Rotation</span><i>•</i><span>Transmission</span><i>•</i><span>Wheel Alignment</span><i>•</i><span>Tire Mounting</span><i>•</i><span>Oxygen Sensor</span><i>•</i><span>Tire Repair</span><i>•</i>
         </div>
         <div class="marquee__group">
-          <span>Oil Changes</span><i>•</i><span>Brake Repair</span><i>•</i><span>Engine Repair</span><i>•</i><span>Transmission</span><i>•</i><span>HVAC</span><i>•</i><span>Steering &amp; Suspension</span><i>•</i><span>Tires</span><i>•</i><span>Fluids &amp; Filters</span><i>•</i>
+          <span>Oil Changes</span><i>•</i><span>Brake Service</span><i>•</i><span>Tire Rotation</span><i>•</i><span>Transmission</span><i>•</i><span>Wheel Alignment</span><i>•</i><span>Tire Mounting</span><i>•</i><span>Oxygen Sensor</span><i>•</i><span>Tire Repair</span><i>•</i>
         </div>
       </div>
     </div>
@@ -155,97 +181,172 @@
         <header class="section__head">
           <p class="section__eyebrow" data-reveal>What we do</p>
           <h2 class="section__title" data-reveal>Full-service care,<br><span class="accent">bumper to bumper.</span></h2>
-          <p class="section__lede" data-reveal>One shop for everything your vehicle needs — diagnosed honestly, fixed right the first time.</p>
+          <p class="section__lede" data-reveal>Tap any service to see pricing — diagnosed honestly, fixed right the first time.</p>
         </header>
 
         <div class="services__grid">
-          <article class="card" data-reveal>
+
+          <!-- Tire Rotation -->
+          <article class="card" data-reveal onclick="toggleCard(this)">
             <div class="card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7s6 7.2 6 11.3a6 6 0 0 1-12 0c0-4.1 6-11.3 6-11.3z"/><path d="M9.5 14a2.5 2.5 0 0 0 2.5 2.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/>
+                <path d="M12 3v2M12 19v2M3 12h2M19 12h2"/>
+                <path d="M6.5 6.5l1.3 1.3M16.2 16.2l1.3 1.3M17.5 6.5l-1.3 1.3M7.8 16.2l-1.3 1.3"/>
+              </svg>
             </div>
-            <h3>Oil Changes</h3>
-            <p>Fast, clean oil &amp; filter service with a multi-point check every visit.</p>
+            <h3>Tire Rotation <span class="card__chevron">▼</span></h3>
+            <p>Keep your tread even and your tires lasting longer — done in under 30 minutes.</p>
+            <div class="card__reveal">
+              <hr class="card__divider">
+              <div class="card__price-label">Flat Rate</div>
+              <div class="card__price">$65</div>
+              <div class="card__price-note">All four wheels · Includes visual inspection</div>
+            </div>
           </article>
 
-          <article class="card" data-reveal>
+          <!-- Oil Change -->
+          <article class="card" data-reveal onclick="toggleCard(this)">
             <div class="card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6.2 6.2l2.1 2.1M15.7 15.7l2.1 2.1M17.8 6.2l-2.1 2.1M8.3 15.7l-2.1 2.1"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.7s6 7.2 6 11.3a6 6 0 0 1-12 0c0-4.1 6-11.3 6-11.3z"/>
+                <path d="M9.5 14a2.5 2.5 0 0 0 2.5 2.5"/>
+              </svg>
             </div>
-            <h3>Brake Repair</h3>
+            <h3>Oil Change <span class="card__chevron">▼</span></h3>
+            <p>Full synthetic oil, labor, and filter — with a multi-point check every visit.</p>
+            <div class="card__reveal">
+              <hr class="card__divider">
+              <div class="card__price-label">Full Synthetic</div>
+              <div class="card__price">$110</div>
+              <div class="card__price-note">Includes oil, filter &amp; labor</div>
+            </div>
+          </article>
+
+          <!-- Wheel Alignment -->
+          <article class="card" data-reveal onclick="toggleCard(this)">
+            <div class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="3" x2="12" y2="21"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M5.8 5.8l1.6 1.6M16.6 16.6l1.6 1.6M18.2 5.8l-1.6 1.6M7.4 16.6l-1.6 1.6"/>
+              </svg>
+            </div>
+            <h3>Wheel Alignment <span class="card__chevron">▼</span></h3>
+            <p>Precision alignment for a straight ride and even, long-lasting tire wear.</p>
+            <div class="card__reveal">
+              <hr class="card__divider">
+              <div class="card__price-row">
+                <div>
+                  <div class="card__price-label">4-Wheel</div>
+                  <div class="card__price">$180</div>
+                </div>
+                <div>
+                  <div class="card__price-label">2-Wheel</div>
+                  <div class="card__price">$105</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Transmission -->
+          <article class="card" data-reveal onclick="toggleCard(this)">
+            <div class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="7" r="2.5"/>
+                <circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="17" r="2.5"/>
+                <path d="M9.5 7h5M7 9.5v5M17 9.5v5M9.5 17h5"/>
+              </svg>
+            </div>
+            <h3>Transmission Service <span class="card__chevron">▼</span></h3>
+            <p>Automatic or manual — fresh fluid for smooth, reliable shifts every time.</p>
+            <div class="card__reveal">
+              <hr class="card__divider">
+              <div class="card__price-row">
+                <div>
+                  <div class="card__price-label">Flush &amp; Fill</div>
+                  <div class="card__price">$355</div>
+                </div>
+                <div>
+                  <div class="card__price-label">Fluid Replace Only</div>
+                  <div class="card__price">$285</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Brake Service -->
+          <article class="card" data-reveal onclick="toggleCard(this)">
+            <div class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 3v2.5M12 18.5v2.5M3 12h2.5M18.5 12h2.5"/>
+              </svg>
+            </div>
+            <h3>Brake Service <span class="card__chevron">▼</span></h3>
             <p>Pads, rotors, calipers and lines — stopping power you can stake your family on.</p>
+            <div class="card__reveal">
+              <hr class="card__divider">
+              <div class="card__price-row">
+                <div>
+                  <div class="card__price-label">4-Wheel Pad Service</div>
+                  <div class="card__price">$325 <sub>+ pads</sub></div>
+                </div>
+                <div>
+                  <div class="card__price-label">Pads &amp; Rotors</div>
+                  <div class="card__price">$475 <sub>+ parts</sub></div>
+                </div>
+              </div>
+            </div>
           </article>
 
-          <article class="card" data-reveal>
+          <!-- Tire Mounting & Repair -->
+          <article class="card" data-reveal onclick="toggleCard(this)">
             <div class="card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h7l2 3h3a1 1 0 0 1 1 1v5h-2"/><path d="M4 10v6h2"/><path d="M7 7v9"/><circle cx="9" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/><path d="M10.6 17h4.8"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 7.4l1.1 2.3 2.5.3-1.8 1.7.5 2.5-2.3-1.2-2.3 1.2.5-2.5-1.8-1.7 2.5-.3z" fill="currentColor" stroke="none"/>
+              </svg>
             </div>
-            <h3>Engine Repair</h3>
-            <p>From rough idles to rebuilds — expert diagnostics and lasting repairs.</p>
+            <h3>Tire Mounting &amp; Repair <span class="card__chevron">▼</span></h3>
+            <p>New set mounting, balancing, and patch or plug repairs — grip for every season.</p>
+            <div class="card__reveal">
+              <hr class="card__divider">
+              <div class="card__price-row">
+                <div>
+                  <div class="card__price-label">Mount &amp; Balance</div>
+                  <div class="card__price">$55 <sub>/ tire + $5 disposal</sub></div>
+                </div>
+                <div>
+                  <div class="card__price-label">Patch or Plug</div>
+                  <div class="card__price">$50</div>
+                </div>
+              </div>
+            </div>
           </article>
 
-          <article class="card" data-reveal>
+          <!-- Oxygen Sensor -->
+          <article class="card" data-reveal onclick="toggleCard(this)">
             <div class="card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14"/><path d="M7 4v9a5 5 0 0 0 10 0V4"/><path d="M9 12h6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a4 4 0 0 1 4 4c0 2.8-4 8-4 8S8 8.8 8 6a4 4 0 0 1 4-4z"/>
+                <circle cx="12" cy="6" r="1.4" fill="currentColor" stroke="none"/>
+                <path d="M7 17h10M9 17l-1 3h8l-1-3"/>
+              </svg>
             </div>
-            <h3>Fluids &amp; Filters</h3>
-            <p>Coolant, brake, power steering and more — fresh fluids, clean filters.</p>
+            <h3>Oxygen Sensor <span class="card__chevron">▼</span></h3>
+            <p>Diagnose and replace faulty O2 sensors for better fuel economy and fewer emissions.</p>
+            <div class="card__reveal">
+              <hr class="card__divider">
+              <div class="card__price-label">Labor</div>
+              <div class="card__price">$105 <sub>+ sensor</sub></div>
+              <div class="card__price-note">Sensor cost varies by vehicle</div>
+            </div>
           </article>
 
-          <article class="card" data-reveal>
-            <div class="card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
-            </div>
-            <h3>HVAC Repair</h3>
-            <p>Ice-cold A/C in July, toasty heat in January. Comfort, restored.</p>
-          </article>
-
-          <article class="card" data-reveal>
-            <div class="card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.6 1 1.5 1 2.5h6c0-1 .3-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>
-            </div>
-            <h3>Light Repair</h3>
-            <p>Headlights, brake lights, dash warnings — see and be seen.</p>
-          </article>
-
-          <article class="card" data-reveal>
-            <div class="card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="1.8"/><path d="M12 3v7M12 14l6 4M12 14l-6 4"/></svg>
-            </div>
-            <h3>Steering &amp; Suspension</h3>
-            <p>Shocks, struts, tie rods, alignments — a smooth, controlled ride.</p>
-          </article>
-
-          <article class="card" data-reveal>
-            <div class="card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/><path d="M10 7h4M7 10v4M17 10v4M10 17h4"/></svg>
-            </div>
-            <h3>Transmission Repair</h3>
-            <p>Automatic or manual — shifts that feel factory-new again.</p>
-          </article>
-
-          <article class="card" data-reveal>
-            <div class="card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5 5.5 5 9a5 5 0 0 1-10 0c0-3.5 5-9 5-9z"/><path d="M5 21h14"/><path d="M8 21l-1-2M16 21l1-2"/></svg>
-            </div>
-            <h3>Transmission Leak Inspection</h3>
-            <p>Catch small leaks before they become big bills. Free with most services.</p>
-          </article>
-
-          <article class="card" data-reveal>
-            <div class="card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 7.4l1.1 2.3 2.5.3-1.8 1.7.5 2.5-2.3-1.2-2.3 1.2.5-2.5-1.8-1.7 2.5-.3z" fill="currentColor" stroke="none"/></svg>
-            </div>
-            <h3>Tire Replacement &amp; Repair</h3>
-            <p>Patches, rotations, balancing and new sets — grip for every season.</p>
-          </article>
-
-          <article class="card card--wide" data-reveal>
-            <div class="card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 0 0-6 6L3 18a2.1 2.1 0 0 0 3 3l5.7-5.7a4.5 4.5 0 0 0 6-6L14.5 12 12 9.5z"/></svg>
-            </div>
-            <h3>Routine Maintenance</h3>
-            <p>Factory-scheduled service that protects your warranty and your wallet. We track it, so you don't have to.</p>
-          </article>
         </div>
       </div>
     </section>
@@ -312,7 +413,7 @@
             <span class="why__num">01</span>
             <div>
               <h3>11 Years, One Standard</h3>
-              <p>Three decades of doing it right. Our reputation is our best advertisement — most new customers come from old ones.</p>
+              <p>Over a decade of doing it right. Our reputation is our best advertisement — most new customers come from old ones.</p>
             </div>
           </li>
           <li class="why__item" data-reveal>
@@ -333,7 +434,7 @@
             <span class="why__num">04</span>
             <div>
               <h3>One Shop for Everything</h3>
-              <p>Brakes to transmissions, tires to A/C — skip the runaround and keep your whole car under one roof.</p>
+              <p>Brakes to transmissions, tires to alignments — skip the runaround and keep your whole car under one roof.</p>
             </div>
           </li>
         </ol>
@@ -366,15 +467,12 @@
             </div>
           </div>
 
-          <!-- FormSubmit: just action + method added; all classes/structure unchanged -->
           <form class="contact__form" id="contactForm"
                 action="https://formsubmit.co/grandozauto@gmail.com"
                 method="POST">
-            <!-- FormSubmit hidden config -->
             <input type="hidden" name="_subject" value="New Appointment Request — Grand Ozaukee Automotive">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_next" value="https://grandozauto.github.io/test/thankyou.html">
-            <!-- Honeypot spam trap (hidden, bots fill it, humans don't) -->
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
             <div class="field-row">
@@ -403,7 +501,7 @@
   <footer class="footer">
     <div class="footer__inner">
       <a href="#top" class="brand brand--footer" aria-label="Back to top">
-      <img src="logo.png" alt="Grand Ozaukee Automotive" class="brand__badge" style="width:44px;height:44px;object-fit:contain;border-radius:6px;background:none;">
+        <span class="brand__badge" aria-hidden="true">GO</span>
         <span class="brand__text">
           <span class="brand__name">Grand Ozaukee</span>
           <span class="brand__sub">Automotive</span>
