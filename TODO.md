@@ -1,3 +1,2 @@
-- Fix services scroll wheel - lags for a second when repeating cycle
-- Change tab icon to GOA logo
-- Make sure all service cards are same size
+- Fix services scroll wheel - stutters when resetting
+- Work on the meet the shop page - style in accordance to the rest of the website and include photo gallery
