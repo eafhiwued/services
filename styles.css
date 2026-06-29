@@ -89,10 +89,12 @@ button:focus-visible {
 }
 .loader__inner { display: grid; gap: 1.1rem; justify-items: center; }
 .loader__logo {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
   display: block;
+  width: 72px !important;
+  height: 72px !important;
+  max-width: 72px !important;
+  max-height: 72px !important;
+  object-fit: contain;
 }
 }
 .loader__bar {
