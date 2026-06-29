@@ -88,14 +88,12 @@ button:focus-visible {
   display: grid; place-items: center;
 }
 .loader__inner { display: grid; gap: 1.1rem; justify-items: center; }
-.loader__badge {
-  font: 400 2rem/1 var(--font-display);
-  letter-spacing: 0.06em;
-  color: #18120e;
-  background: var(--accent-grad);
-  width: 72px; height: 72px;
-  display: grid; place-items: center;
-  border-radius: 20px;
+.loader__logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  display: block;
+}
 }
 .loader__bar {
   width: 140px; height: 3px; border-radius: 3px;
