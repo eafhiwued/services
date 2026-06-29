@@ -1,0 +1,3 @@
+- Fix services scroll wheel - lags for a second when repeating cycle
+- Change tab icon to GOA logo
+- Make sure all service cards are same size
