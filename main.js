@@ -42,14 +42,17 @@
   });
 
   // Contact form — validate only; FormSubmit handles submission
+  // (guarded: not every page has a contact form, e.g. shop.html)
   var form = document.getElementById("contactForm");
   var note = document.getElementById("formNote");
-  form.addEventListener("submit", function (e) {
-    if (!form.checkValidity()) {
-      e.preventDefault();
-      note.textContent = "Please fill in your name, phone, and what your vehicle needs.";
-    }
-  });
+  if (form && note) {
+    form.addEventListener("submit", function (e) {
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        note.textContent = "Please fill in your name, phone, and what your vehicle needs.";
+      }
+    });
+  }
 
   // Service card price reveal — anti-twitch: wait for collapse before expanding
   window.toggleCard = function (card) {
