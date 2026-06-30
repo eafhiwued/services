@@ -359,14 +359,13 @@ button:focus-visible {
   aspect-ratio: 4 / 3;
   background: var(--bg-3);
 }
-
 .about__photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
+.about__art { width: 100%; height: auto; }
 .about__badge {
   position: absolute; top: 1rem; right: 1rem;
   background: var(--accent-grad);
@@ -516,6 +515,67 @@ a.contact__tile:hover { border-color: rgba(255, 90, 31, 0.5); background: rgba(2
 .js .hero__line-inner { transform: translateY(110%); }
 .js [data-hero-fade] { opacity: 0; transform: translateY(18px); }
 
+/* ---------- Shop page hero ---------- */
+.shop-hero {
+  position: relative;
+  padding: calc(var(--header-h) + 3.5rem) 1.25rem 3rem;
+  overflow: hidden;
+}
+.shop-hero__bg { position: absolute; inset: 0; pointer-events: none; }
+.shop-hero__title { max-width: 16ch; }
+.shop-hero__lede { margin-top: 1.1rem; }
+
+/* ---------- Team gallery ---------- */
+.team { background: var(--bg); padding-top: 1rem; }
+.team__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+.team__card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+.team__card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 90, 31, 0.45);
+  background: var(--bg-3);
+}
+.team__photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bg-3);
+}
+.team__photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.team__info { padding: 1.4rem 1.5rem 1.6rem; }
+.team__name {
+  font: 400 1.6rem/1 var(--font-display);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.team__role {
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent-2);
+  margin-top: 0.35rem;
+  margin-bottom: 0.7rem;
+}
+.team__bio { color: var(--muted); font-size: 0.93rem; }
+
+/* ---------- Shop CTA ---------- */
+.shop-cta__inner { text-align: center; }
+.shop-cta .section__lede { margin: 1rem auto 0; }
+.shop-cta .hero__actions { justify-content: center; margin-top: 2rem; }
+
 /* ============================================================
    Tablet & up
    ============================================================ */
@@ -525,6 +585,7 @@ a.contact__tile:hover { border-color: rgba(255, 90, 31, 0.5); background: rgba(2
   .services__grid { grid-template-columns: repeat(2, 1fr); gap: 1.15rem; }
   .contact__card { padding: 3rem 2.5rem; }
   .contact__submit { width: auto; justify-self: start; }
+  .team__grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (min-width: 900px) {
@@ -549,6 +610,8 @@ a.contact__tile:hover { border-color: rgba(255, 90, 31, 0.5); background: rgba(2
 
   .why__item { grid-template-columns: 90px 1fr; padding: 2.2rem 0; }
   .why__num { font-size: 2rem; }
+
+  .team__grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (min-width: 1200px) {
